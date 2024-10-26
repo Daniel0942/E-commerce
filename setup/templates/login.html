@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
+    <title>Login</title>
+</head>
+<body>
+        <div id="formulario">
+            <h1>Login e-commerce</h1>
+            <form method="post">
+                <input type="text" placeholder="Username" name="username">
+                <input type="text" placeholder="Password" name="password">
+                <button>Logar</button>
+            </form>
+
+            <p>Registre-se aqui</p>
+            <button>Registrar</button>
+        </div>
+</body>
+</html>

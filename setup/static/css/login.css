@@ -1,0 +1,58 @@
+/*Geral*/
+* {
+    margin: 0;
+    padding: 0;
+}
+
+/*Flash*/
+.msg-flash {
+    background-color: #3f3f3f;
+    padding: 20px;
+    & p {
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+    }
+}
+div#formulario {
+    text-align: center;
+    margin-top: 10%;
+    & form {
+        display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    margin:0 auto;
+    max-width: 500px;
+    gap: 10px;
+
+        & input {
+            width: 100%;
+            background-color: #3f3f3f;
+            text-align: center;
+            padding: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 500;
+            border: 0;
+            border-radius: 5px;
+        }
+        
+    }
+    & button {
+        width: 100px;
+        height: 50px;
+        padding: 10px;
+        color: black;
+        font-size: 15px;
+        font-weight: 600;
+        background-color: yellow;
+        border-radius: 10px;
+        border: 2px solid #ffff00b5;
+        box-shadow: 3px 3px 10px #ffff007e;
+        transition: .5s;
+        &:hover {
+            transform: scale(1.05);
+        }
+        }
+}

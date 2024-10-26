@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
+    <title>Registrar</title>
+</head>
+<body>
+    <!-- Exibir mensagens flash -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="msg-flash">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    
+        <div id="formulario">
+            <h1>Registro e-commerce</h1>
+            <form method="post">
+                <input type="text" placeholder="Username" name="username">
+                <input type="text" placeholder="Password" name="password">
+                <button>Registrar</button>
+            </form>
+
+            <p>Já tem login, logue aqui</p>
+            <button>Login</button>
+        </div>
+</body>
+</html>
