@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
+    <script src="{{ url_for('static', filename = 'js/script.js') }}" defer></script>
     <title>Registrar</title>
 </head>
 <body>
@@ -18,16 +19,17 @@
     {% endif %}
     {% endwith %}
     
-        <div id="formulario">
-            <h1>Registro e-commerce</h1>
-            <form method="post">
-                <input type="text" placeholder="Username" name="username">
-                <input type="text" placeholder="Password" name="password">
-                <button>Registrar</button>
-            </form>
+    <div id="formulario">
+        <h1>Registro e-commerce</h1>
+        <form method="post">
+            <input type="text" placeholder="Username" name="username">
+            <input type="text" placeholder="Password" name="password">
+            <button>Registrar</button>
+        </form>
 
-            <p>Já tem login, logue aqui</p>
-            <button>Login</button>
-        </div>
+        <p>Já tem login, logue aqui</p>
+        <a href="/"><button>Login</button></a>
+    </div>
+
 </body>
 </html>

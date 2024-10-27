@@ -1,6 +1,7 @@
 from setup import app
 from flask import render_template, flash, redirect, url_for, request, session
 from setup.models.table import Conexao
+from mysql.connector import connect, errors
 
 @app.route("/")
 def login():
@@ -12,7 +13,8 @@ def registrar():
 
 @app.route("/loja")
 def loja():
-    return render_template("loja.html")
+    username = session.get("username_foreign")  # Recupera o username da sessão
+    return render_template("loja.html", username = username)
 
 # Receber dados do novo registro do front end
 @app.route("/registrar", methods = ["POST"])
@@ -26,9 +28,36 @@ def CADASTRO():
         conectar.conectar.commit()
         flash(f"{username} cadastrado com sucesso")
         return redirect(url_for("login"))
-    except Exception as e:
-        print(f"[ERRO] ao registrar usuário: {str(e)}")
-        flash(f"Erro ao cadastrar {username}")
-        return redirect(url_for("registrar"))
+    except errors.IntegrityError as e:
+        # Verifica se o erro é de duplicidade de chave única (Código 1062)
+        if e.errno == 1062:
+            flash("Usuário já existe, escolha outro")
+            conectar.reverterCommit()
+            return redirect(url_for("registrar"))
+        else:
+            return print("Erro no banco de dados !")
+            conectar.reverterCommit()
+            return redirect(url_for("registrar"))
     finally:
         conectar.fecharconexões()
+
+# (Logar) verificar se o username e password estão iguais ao do banco de dados e redicionar o usuário a loja
+@app.route("/", methods = ["POST"])
+def LOGAR():
+    username = request.form["username"]
+    password = request.form["password"]
+    
+    conectar = Conexao()
+    conectar.cursor.execute("SELECT username FROM users WHERE username = %s AND password = %s", (username, password))
+    username = conectar.cursor.fetchone()
+    
+    if username:
+        session["username_foreign"] = username[0]  #armazenar username na sessão, pra usar na outra tabela
+        flash(f"{username} logado com sucesso")
+        return redirect(url_for("loja"))
+    else:
+        flash("Usuário ou senha incorretos !")
+        return redirect(url_for("login"))
+    
+
+    

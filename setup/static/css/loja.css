@@ -1,0 +1,136 @@
+/* Gerais */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial;
+}
+
+.flex {
+    display: flex;
+}
+.interface {
+    max-width: 1280px;
+    padding: 40px;
+}
+
+button {
+    margin-top: 10px;
+    width: 110px;
+    height: 30xp;
+    padding: 15px;
+    border-radius: 5px;
+    border: 0;
+    background-color: yellow;
+    font-size: 18px;
+    font-weight: 700;
+    transition: .5s;
+    &:hover {
+        transform: scale(1.06);
+    }
+}
+/* Header */
+header {
+    padding: 10px;
+    & .flex {
+    justify-content: space-around;
+    }
+    & img {
+        width: 100px;
+    }
+    & ul {
+        margin-top: 50px;
+
+        & li {
+            display: inline-block;
+            font-size: 18px;
+            font-weight: 600;
+            padding: 10px;
+            border-radius: 5px;
+            transition: .5s;
+
+            &:hover {
+                transform: scale(1.06);
+                color: red;
+                font-weight: 700;
+                border-bottom: 2px solid red;
+            }
+        }
+    }
+}
+/* menu */
+div#menu {
+    margin-top: 50px;
+    padding: 8px;
+    background-color: yellow;
+    border-radius: 10px;
+}
+div#menu .abrirMenu {
+    background-color: red;
+}
+.fechar-menu {
+    display: none;
+}
+
+/* Seção topo do site */
+section#topo-do-site {
+    & .interface {
+        background: linear-gradient(to right, #232526, #414345);
+        border-radius: 20px;
+        justify-content: center;
+        text-align: center;
+        margin: 20px auto;
+        gap: 100px;
+
+        & img {
+            width: 300px;
+        }
+        & .topo-txt {
+            margin-top: 50px;
+            color: white;
+            & span {
+                color: yellow;
+                font-weight: 500;
+            }
+            & h1#title {
+                color:#ffffff8d;
+            }
+        }
+    }
+}
+
+/* itens */
+
+section#itens {
+    & .flex {
+        gap: 10px;
+        flex-wrap: wrap;
+        margin: 0 auto;
+
+        & .caixa-item {
+            width: 400px;
+            justify-items: center;
+            background: linear-gradient(#3f3f3f, red);
+            border-radius: 15px;
+            padding: 15px;
+            }
+            & img {
+                width: 250px;
+                transition: .5s;
+                &:hover {
+                    transform: scale(1.10);
+                }
+            }
+            & h3 {
+                font-size: 22px;
+                font-weight: 600;
+            }
+            & p {
+                font-size: 20px;
+                color: white;
+                text-shadow: -1px -2px black;
+                font-weight: 600;
+            }
+        }
+    }

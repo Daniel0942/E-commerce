@@ -4,19 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/login.css') }}">
+    <script src="{{ url_for('static', filename = 'js/script.js') }}" defer></script>
     <title>Login</title>
 </head>
 <body>
-        <div id="formulario">
-            <h1>Login e-commerce</h1>
-            <form method="post">
-                <input type="text" placeholder="Username" name="username">
-                <input type="text" placeholder="Password" name="password">
-                <button>Logar</button>
-            </form>
+    <!-- Exibir mensagens flash -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="msg-flash">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
 
-            <p>Registre-se aqui</p>
-            <button>Registrar</button>
-        </div>
+    <div id="formulario">
+        <h1>Login e-commerce</h1>
+        <form method="post">
+            <input type="text" placeholder="Username" name="username">
+            <input type="text" placeholder="Password" name="password">
+            <button>Logar</button>
+        </form>
+
+        <p>Registre-se aqui</p>
+        <a href="/registrar"><button>Registrar</button></a>
+    </div>
 </body>
 </html>

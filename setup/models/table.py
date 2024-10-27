@@ -33,4 +33,6 @@ class Conexao():
     def fecharconexões(self):
         self.cursor.close()
         self.conectar.close()
-#conexao = conexao()
+    
+    def reverterCommit(self):
+        self.conectar.rollback()
