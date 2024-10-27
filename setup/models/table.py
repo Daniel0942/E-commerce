@@ -22,11 +22,21 @@ class Conexao():
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS produtos(
         id INT PRIMARY KEY AUTO_INCREMENT,
-        id_username VARCHAR(50),
+        produto VARCHAR(50) NOT NULL,
+        estoque INT NOT NULL,
+        preço DECIMAL(10, 2) NOT NULL
+        )""")
+        self.conectar.commit()
+
+        # Criar tabela carrinho de compras
+        self.cursor.execute("""
+        CREATE TABLE IF NOT EXISTS carrinho(
+        id INT PRIMARY KEY AUTO_INCREMENT,
+        username VARCHAR(50) NOT NULL,
         produto VARCHAR(50) NOT NULL,
         quantidade INT NOT NULL,
         preço DECIMAL(10, 2) NOT NULL,
-        FOREIGN KEY (id_username) REFERENCES users(username)
+        FOREIGN KEY (username) REFERENCES users(username)
         )""")
         self.conectar.commit()
 
@@ -36,3 +46,32 @@ class Conexao():
     
     def reverterCommit(self):
         self.conectar.rollback()
+    
+    def adicionarProdutos(self, produtos):
+        try:
+            for produto in produtos:
+                self.cursor.execute("INSERT INTO produtos (produto, estoque, preço) VALUES (%s, %s, %s)", (produto["produto"], produto["estoque"], produto["preço"]))
+                self.conectar.commit()
+                print(f"Produto {produto["produto"]} inserido na tabela produtos com sucesso")
+        except Exception as e:
+            print(f"Ocorreu ao ao inserir produtos ao carrinho: {str(e)}")
+            self.conectar.rollback()
+        finally:
+            self.cursor.close()
+            self.conectar.close()
+
+produtos = [
+    {"produto": "Echo Dot",
+    "estoque": 20,
+    "preço": 250},
+
+    {"produto": "Fone QCY",
+    "estoque": 50,
+    "preço": 150},
+
+    {"produto": "Fone 520bt",
+    "estoque": 80,
+    "preço": 300},
+]
+"""conexao = Conexao()
+conexao.adicionarProdutos(produtos)"""

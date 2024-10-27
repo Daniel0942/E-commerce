@@ -8,8 +8,17 @@ setTimeout(() => {
 }, 3000);
 
 // funcionalidade menu 
+let abrirMenu = document.getElementById("abrir-menu")
 let menu = document.getElementById("menu")
+let fecharMenu = document.getElementById("fechar-menu")
+let telaFundo = document.getElementsByClassName("tela-fundo")[0]
 
-menu.addEventListener("click", ()=> {
-    menu.classList.add("abrirMenu")
+abrirMenu.addEventListener("click", ()=> {
+    menu.classList.add("menu-JS")
+})
+fecharMenu.addEventListener("click", ()=> {
+    menu.classList.remove("menu-JS")
+})
+telaFundo.addEventListener("click", ()=> {
+    menu.classList.remove("menu-JS")
 })
