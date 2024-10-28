@@ -24,7 +24,8 @@ class Conexao():
         id INT PRIMARY KEY AUTO_INCREMENT,
         produto VARCHAR(50) NOT NULL,
         estoque INT NOT NULL,
-        preço DECIMAL(10, 2) NOT NULL
+        preço DECIMAL(10, 2) NOT NULL,
+        imagem VARCHAR(100)
         )""")
         self.conectar.commit()
 
@@ -50,7 +51,7 @@ class Conexao():
     def adicionarProdutos(self, produtos):
         try:
             for produto in produtos:
-                self.cursor.execute("INSERT INTO produtos (produto, estoque, preço) VALUES (%s, %s, %s)", (produto["produto"], produto["estoque"], produto["preço"]))
+                self.cursor.execute("INSERT INTO produtos (produto, estoque, preço, imagem) VALUES (%s, %s, %s, %s)", (produto["produto"], produto["estoque"], produto["preço"], produto["imagem"]))
                 self.conectar.commit()
                 print(f"Produto {produto["produto"]} inserido na tabela produtos com sucesso")
         except Exception as e:
@@ -61,17 +62,20 @@ class Conexao():
             self.conectar.close()
 
 produtos = [
-    {"produto": "Echo Dot",
+    {"produto": "Fone 520bt",
     "estoque": 20,
-    "preço": 250},
+    "preço": 250,
+    "imagem": "img/fone520bt.png"},
 
     {"produto": "Fone QCY",
     "estoque": 50,
-    "preço": 150},
+    "preço": 150,
+    "imagem": "img/foneQCY.webp"},
 
-    {"produto": "Fone 520bt",
+    {"produto": "Echo Dot",
     "estoque": 80,
-    "preço": 300},
+    "preço": 300,
+    "imagem": "img/caixa_de_som(echo).webp"},
 ]
 """conexao = Conexao()
 conexao.adicionarProdutos(produtos)"""

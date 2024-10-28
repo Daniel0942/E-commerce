@@ -60,12 +60,14 @@
 
     <section id="itens">
         <div class="flex interface">
+            {% for produto in produtos %}
             <div class="caixa-item">
-                <img src="{{ url_for('static', filename = 'img/fone520bt.png') }}" alt="">
-                <h3>Fone de Ouvido HeadSet P9 Pro Max Bluetooth 5.1</h3>
-                <p>R$ 250,00</p>
+                <img src="{{ url_for('static', filename =produto[4]) }}" alt="">
+                <h3>{{ produto[1] }}</h3>
+                <p>{{ produto[3] }}</p>
                 <button>Comprar</button>
             </div>
+            {% endfor %}
         </div>
     </section>
 

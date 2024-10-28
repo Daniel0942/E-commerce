@@ -149,10 +149,12 @@ section#topo-do-site {
 
 section#itens {
     & .flex {
-        gap: 10px;
         flex-wrap: wrap;
+        justify-content: center;
+        justify-items: center;
         margin: 0 auto;
-
+        gap: 30px;
+        
         & .caixa-item {
             width: 400px;
             justify-items: center;

@@ -14,7 +14,12 @@ def registrar():
 @app.route("/loja")
 def loja():
     username = session.get("username_foreign")  # Recupera o username da sessão
-    return render_template("loja.html", username = username)
+    # extraindo produtos do banco de dados
+    conectar = Conexao()
+    conectar.cursor.execute("SELECT * FROM produtos")
+    produtos = conectar.cursor.fetchall()
+    conectar.fecharconexões()
+    return render_template("loja.html", username = username, produtos = produtos)
 
 # Receber dados do novo registro do front end
 @app.route("/registrar", methods = ["POST"])
@@ -58,6 +63,3 @@ def LOGAR():
     else:
         flash("Usuário ou senha incorretos !")
         return redirect(url_for("login"))
-    
-
-    
