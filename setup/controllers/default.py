@@ -9,6 +9,8 @@ def login():
 
 @app.route("/registrar")
 def registrar():
+    session.pop("username_foreign", None)  # Remove a chave 'user_id' da sessão
+    session.pop("_flashes", None)  # Remove as mensagens flash
     return render_template("registrar.html")
 
 @app.route("/loja")
@@ -63,3 +65,11 @@ def LOGAR():
     else:
         flash("Usuário ou senha incorretos !")
         return redirect(url_for("login"))
+
+# fazer logout
+@app.route("/logout")
+def LOGOUT():
+    username = session.get("username_foreign")
+    session.pop("username_foreign", None)  # Remove a chave 'user_id' da sessão
+    flash(f"O {username} foi desconectado com sucesso !")
+    return redirect(url_for("login"))
