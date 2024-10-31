@@ -26,7 +26,7 @@ def loja():
 def carrinho():
     username = session.get("username_foreign")
     conectar = Conexao()
-    conectar.cursor.execute("SELECT * FROM carrinho")
+    conectar.cursor.execute("SELECT produtos.produto, carrinho.quantidade, produtos.preço, carrinho.produto_id FROM carrinho JOIN produtos ON carrinho.produto_id = produtos.id WHERE carrinho.username = %s", (username,))
     carrinho = conectar.cursor.fetchall()
     conectar.fecharconexões()
     return render_template("carrinho.html", carrinho = carrinho, username = username)
@@ -93,23 +93,51 @@ def adicionar_carrinho():
     if produto_id:
         try:
             conectar = Conexao()
-            # Pegar produto escolhido da tabela produtos
-            conectar.cursor.execute("SELECT * FROM produtos WHERE id = %s", (produto_id,))
-            produto = conectar.cursor.fetchone()
             # inserir produto na tabela carrinho
-            conectar.cursor.execute("INSERT INTO carrinho (username, produto, quantidade, preço) VALUES (%s, %s, %s, %s)", (session["username_foreign"], produto[1], produto[2], produto[3]))
+            conectar.cursor.execute("INSERT INTO carrinho (username, produto_id) VALUES (%s, %s)", (session["username_foreign"], produto_id))
             conectar.conectar.commit()
             flash("Produto adicionado com sucesso")
             return redirect(url_for("carrinho"))
         except errors.IntegrityError as e:
+            # Verifica se o erro é de duplicidade de chave única (Código 1062)
             if e.errno == 1062:
-                flash("Produto já adicionado ao carrinho")
-                return redirect(url_for("loja"))
-            else:
-                flash("Erro no banco de dados")
+                flash(f"[ERRO], Produto já adicionado no carrinho! ")
                 return redirect(url_for("loja"))
         finally:
             conectar.fecharconexões()
     else:
         flash("Erro ao adicionar produto !")
         return redirect(url_for("loja"))
+
+# Excluir do carrinho
+@app.route("/excluir", methods = ["POST"])
+def excluir():
+    produto_id = request.form.get("produto_id")
+    try:
+        conectar = Conexao()
+        conectar.cursor.execute("DELETE FROM carrinho WHERE produto_id = %s", (produto_id,))
+        conectar.conectar.commit()
+        flash(f"Produto removido do carrinho !")
+        return redirect(url_for("carrinho"))
+    except:
+            flash(f"Ocorreu erro ao remover produto, tente novamente")
+            return redirect(url_for("carrinho"))
+    finally:
+        conectar.fecharconexões()
+
+# Editar quantidade do carrinho (ta sem funcionar, falta completar o front)
+@app.route("/editar", methods= ["POST"])
+def editar():
+    produto_id = request.form.get("produto_id")
+    try:
+        conectar = Conexao()
+        conectar.cursor.execute("UPDATE carrinho SET quantidade = %s WHERE produtos_id = %s", (quantidade, produto_id))
+        conectar.conectar.commit()
+        flash("Quantidade atualizada com sucesso")
+        return redirect(url_for("carrinho"))
+    except:
+        flash("Erro ao atualizar quantidade, tente novamente !")
+        conectar.reverterCommit()
+        return redirect(url_for("carrinho"))
+    finally:
+        conectar.fecharconexões()

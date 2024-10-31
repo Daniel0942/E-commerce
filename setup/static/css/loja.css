@@ -240,9 +240,26 @@ section#Carrinho {
             font-size: 16px;
             font-weight: 600;
             & span {
-                color: yellow;
+                color: #ffff00d5;
                 font-weight: 700;
             }
+        }
+        & .caixa-btns {
+            display: flex;
+            justify-content: space-evenly;
+        }
+        & .btns {
+            margin-top: 0px;
+            width: 60px;
+            height: 30xp;
+            padding: 8px;
+            border-radius: 15px;
+        }
+        & .editar {
+            background-color: blue;
+        }
+        & .excluir {
+            background-color: red;
         }
     }
 }

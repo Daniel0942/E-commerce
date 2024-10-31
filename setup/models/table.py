@@ -33,11 +33,11 @@ class Conexao():
         self.cursor.execute("""
         CREATE TABLE IF NOT EXISTS carrinho(
         id INT PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(50) NOT NULL,
-        produto VARCHAR(50) NOT NULL UNIQUE,
-        quantidade INT NOT NULL,
-        preço DECIMAL(10, 2) NOT NULL,
-        FOREIGN KEY (username) REFERENCES users(username)
+        username VARCHAR(50),
+        produto_id INT UNIQUE,
+        quantidade INT DEFAULT 1,
+        FOREIGN KEY (username) REFERENCES users(username),
+        FOREIGN KEY (produto_id) REFERENCES produtos(id)
         )""")
         self.conectar.commit()
 
