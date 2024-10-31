@@ -72,7 +72,7 @@ def LOGAR():
     
     if username:
         session["username_foreign"] = username[0]  #armazenar username na sessão, pra usar na outra tabela
-        flash(f"{username} logado com sucesso")
+        flash(f"{username[0]} logado com sucesso")
         return redirect(url_for("loja"))
     else:
         flash("Usuário ou senha incorretos !")
@@ -101,10 +101,13 @@ def adicionar_carrinho():
             conectar.conectar.commit()
             flash("Produto adicionado com sucesso")
             return redirect(url_for("carrinho"))
-        except Exception as e:
-            print(f"Erro ao inserir produto ao carrinho: {str(e)}")
-            flash("Erro ao adicionar ao carrinho")
-            return redirect(url_for("loja"))
+        except errors.IntegrityError as e:
+            if e.errno == 1062:
+                flash("Produto já adicionado ao carrinho")
+                return redirect(url_for("loja"))
+            else:
+                flash("Erro no banco de dados")
+                return redirect(url_for("loja"))
         finally:
             conectar.fecharconexões()
     else:

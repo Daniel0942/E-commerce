@@ -9,7 +9,17 @@
     <title>E-commerce Criado com Flask Python</title>
 </head>
 <body>
-
+    <!-- Exibir mensagens flash -->
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="msg-flash">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+    
     <header id="header">
         <div class="flex">
             <img src="{{ url_for('static', filename = 'img/flask_logo.png') }}" alt="logo">
