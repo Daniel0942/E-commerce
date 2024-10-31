@@ -9,14 +9,13 @@
     <title>E-commerce Criado com Flask Python</title>
 </head>
 <body>
-
     <header id="header">
         <div class="flex">
             <img src="{{ url_for('static', filename = 'img/flask_logo.png') }}" alt="logo">
 
             <ul>
                 <li><a href="/loja">Home</a></li>
-                <li><a href="#itens">Loja</a></li>
+                <li><a href="/loja">Loja</a></li>
                 <li><a href="#">Contato</a></li>
                 <li>
                     <a href="/carrinho">
@@ -53,41 +52,16 @@
             <div class="tela-fundo"></div>
         </div><!--flex-->
     </header><!--header-->
-    
-    <!--
-    Quando for usar puxar a variável do back usa {{ username }}
-    -->
-    
-    <section id="topo-do-site">
-        <div class="flex interface">
-                <img src="{{ url_for('static', filename = 'img/caixa_de_som(echo).webp') }}" alt="">
 
-            <div class="topo-txt">
-                <p><span>Desconto especial</span></p>
-                <h1 id="title">Echo Pop</h1>
-                <h1>depois de 20% de desconto</h1>
-                <button>Comprar</button>
-            </div><!--caixa-itens-txt-->
-        </div><!--flex interface-->
-    </section><!--topo-do-site-->
-
-    <section id="itens">
+    <section id="Carrinho">
+        <h2>Carrinho de compras</h2>
         <div class="flex interface">
-            {% for produto in produtos %}
-            <div class="caixa-item">
-                <img src="{{ url_for('static', filename =produto[4]) }}" alt="">
-                <h3>{{ produto[1] }}</h3>
-                <p>{{ produto[3] }}</p>
-                <button>Comprar</button>
-                <form action="/AdicionarCarrinho" method="post">
-                    <input type="hidden" name="produto_id" value="{{ produto[0] }}">
-                    <button class="carrinho">Adicionar ao carrinho
-                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-bag" viewBox="0 0 16 16">
-                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1m3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4zM2 5h12v9a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1z"/>
-                        </svg>
-                    </button>
-                </form>
-            </div>
+            {% for produto in carrinho %}
+                <div class="produtos_carrinho">
+                    <p>Produto: <span>{{produto[2]}}</span></p>
+                    <p>Quantidade em estoque: <span>{{produto[3]}}</span></p>
+                    <p>Preço: <span>R${{produto[4]}}</span></p>
+                </div>
             {% endfor %}
         </div>
     </section>

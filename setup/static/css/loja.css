@@ -58,11 +58,14 @@ header {
                 font-weight: 700;
                 border-bottom: 2px solid red;
             }
-        }
-        & a {
-            margin-left: 20px;
-            text-decoration: none;
-            color: black;
+            & a {
+                padding: 20px;
+                text-decoration: none;
+                color: black;
+                &:hover {
+                    color: red;
+                }
+            }
         }
     }
 }
@@ -185,11 +188,14 @@ section#itens {
                 text-shadow: -1px -2px black;
                 font-weight: 600;
             }
+            & .carrinho {
+                display: block;
+                width: 160px;
+            }
         }
     }
 
 /* Rodapé */
-
 .rodapé {
     text-align: center;
     background-color: black;
@@ -199,5 +205,33 @@ section#itens {
         font-size: 16px;
         font-weight: 600;
         color: white;
+    }
+}
+
+/* Página do carrinho de compras*/
+section#Carrinho {
+    margin-top: 40px;
+    & h2 {
+        text-align: center;
+    }
+    & .flex {
+        flex-wrap: wrap;
+    }
+    & .produtos_carrinho {
+        padding: 10px;
+        border-radius: 10px;
+        & p {
+            background-color: #3f3f3f;
+            color: white;
+            border-radius: 10px;
+            padding: 10px;
+            margin: 5px 0px;
+            font-size: 16px;
+            font-weight: 600;
+            & span {
+                color: yellow;
+                font-weight: 700;
+            }
+        }
     }
 }
