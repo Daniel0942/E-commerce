@@ -10,7 +10,8 @@ class Conexao():
             host = os.getenv("host"),
             user = os.getenv("user"),
             password = os.getenv("password"),
-            database = os.getenv("database")
+            database = os.getenv("database"),
+            porta = os.getenv("porta")
         )
         self.cursor = self.conectar.cursor()
 
