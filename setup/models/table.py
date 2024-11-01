@@ -1,12 +1,16 @@
 import mysql.connector
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 class Conexao():
     def __init__(self):
         self.conectar = mysql.connector.connect(
-            host = "localhost",
-            user = "root",
-            password = "0942",
-            database = "e_commerce"
+            host = os.getenv("host"),
+            user = os.getenv("user"),
+            password = os.getenv("password"),
+            database = os.getenv("database")
         )
         self.cursor = self.conectar.cursor()
 
@@ -53,7 +57,7 @@ class Conexao():
             for produto in produtos:
                 self.cursor.execute("INSERT INTO produtos (produto, estoque, preço, imagem) VALUES (%s, %s, %s, %s)", (produto["produto"], produto["estoque"], produto["preço"], produto["imagem"]))
                 self.conectar.commit()
-                print(f"Produto {produto["produto"]} inserido na tabela produtos com sucesso")
+                print(f"Produto {produto['produto']} inserido na tabela produtos com sucesso")
         except Exception as e:
             print(f"Ocorreu ao ao inserir produtos ao carrinho: {str(e)}")
             self.conectar.rollback()
