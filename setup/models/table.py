@@ -6,14 +6,18 @@ load_dotenv()
 
 class Conexao():
     def __init__(self):
-        self.conectar = mysql.connector.connect(
-            host = os.getenv("host"),
-            user = os.getenv("user"),
-            password = os.getenv("password"),
-            database = os.getenv("database"),
-            port = os.getenv("port")
-        )
-        self.cursor = self.conectar.cursor()
+        try:
+            self.conectar = mysql.connector.connect(
+                host = os.getenv("host"),
+                user = os.getenv("user"),
+                password = os.getenv("password"),
+                database = os.getenv("database"),
+                port = int(os.getenv("port"))
+            )
+            print(os.getenv("user"))
+            self.cursor = self.conectar.cursor()
+        except mysql.connector.Error as e:
+            print(f"Ocorreu o erro: {str(e)}")
 
         # Criando a tabela users
         self.cursor.execute("""
