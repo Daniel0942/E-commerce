@@ -11,7 +11,7 @@ class Conexao():
             user = os.getenv("user"),
             password = os.getenv("password"),
             database = os.getenv("database"),
-            porta = os.getenv("porta")
+            port = os.getenv("port")
         )
         self.cursor = self.conectar.cursor()
 
