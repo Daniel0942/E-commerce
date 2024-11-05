@@ -14,7 +14,6 @@ class Conexao():
                 database = os.getenv("database"),
                 port = int(os.getenv("port"))
             )
-            print(os.getenv("user"))
             self.cursor = self.conectar.cursor()
         except mysql.connector.Error as e:
             print(f"Ocorreu o erro: {str(e)}")
