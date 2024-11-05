@@ -51,12 +51,12 @@
                 </div><!--fechar-menu-->
                 <div class="botoes-menu">
                     {% if username %}
-                    <p><button><a href="/">Login</a></button></p>
-                    <p><button><a href="/logout">Logout</a></button></p>
+                        <h2 style="text-align: center; padding: 10px ;">Logado com {{useranme}}</h2>
+                        <p><button><a href="/logout">Logout</a></button></p>
                     {% else %}
-                    <h2 style="text-align: center; padding: 10px ;">Usuário não cadastrado</h2>
-                    <p><button><a href="/registrar">Registrar</a></button></p>
-                    <p><button><a href="/">Login</a></button></p>
+                        <h2 style="text-align: center; padding: 10px ;">Usuário não cadastrado</h2>
+                        <p><button><a href="/registrar">Registrar</a></button></p>
+                        <p><button><a href="/">Login</a></button></p>
                     {% endif %}
                 </div>
             </div><!--menu-->
